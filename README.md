@@ -152,4 +152,9 @@ docker run -p 8000:8000 -e HOST=0.0.0.0 -e PORT=8000 nazwa_kontenera
   
 ![image](https://user-images.githubusercontent.com/4579021/232339841-2d3d9420-2484-4cc9-8aad-a2a66c2c714c.png)
 
+    
+    
+## Demo Docker-compose Frontend and Backend
+https://github.com/ciepielajan/Demo_Frontend_and_Backend_Docker_Docker-compose
+    
 
