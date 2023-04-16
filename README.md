@@ -46,25 +46,24 @@ docker run hello-world
 ```
 ## Tworzenie pliku Dockerfile
 ```Dockerfile
-FROM python:3.8-slim-buster
+# Określa bazowy obraz Docker, na którym zostanie zbudowany nasz kontener. 
+FROM python:3.8-slim-buster  
 
-WORKDIR /app
-ADD requirements.txt . 
-RUN pip install -r requirements.txt
-COPY . .
-WORKDIR /app/folder_projektu  
-CMD ["python", "-m" , "flask", "run", "--host=0.0.0.0"]
-```
-Objaśnienia:
-```Dockerfile
-FROM python:3.8-slim-buster
+# Ustawia bieżący katalog roboczy wewnątrz kontenera jako "/app"
+WORKDIR /app  
 
-WORKDIR /app
-ADD requirements.txt . 
-RUN pip install -r requirements.txt
-COPY . .
-EXPOSE 8004
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8004" , "--reload"]
+# Kopiuje plik "requirements.txt" z lokalnego systemu do katalogu "/app" wewnątrz kontenera
+ADD requirements.txt .  
+
+# Instaluje wymagane biblioteki Pythona, korzystając z pliku "requirements.txt"
+RUN pip install -r requirements.txt  
+
+# Kopiuje całą zawartość katalogu lokalnego do katalogu "/app" wewnątrz kontenera
+COPY . .  
+
+# Uruchamia aplikację FastAPI na porcie 8004, korzystając z serwera ASGI "uvicorn" i pliku "app.py" zawierającego obiekt aplikacji FastAPI
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8004" , "--reload"]  
+
 ```
 
 
