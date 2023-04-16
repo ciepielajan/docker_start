@@ -4,13 +4,19 @@
 
 ```bash
 docker version
-docker ps
 docker run hello-word
+docker ps
+docker images
+docker container ls -a
+docker rm name_container
 # Sprawdzenie statusu działania dockera
 sudo systemctl status docker.service 
 ```
 
 ## instalacja na ubunu 20.04
+
+https://www.cherryservers.com/blog/how-to-install-and-start-using-docker-on-ubuntu-20-04
+
 
 
 ## błędy i rozwiązania: 
