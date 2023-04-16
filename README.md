@@ -44,28 +44,6 @@ sudo systemctl status docker
 ```
 docker run hello-world
 ```
-## Tworzenie pliku Dockerfile
-```Dockerfile
-# Określa bazowy obraz Docker, na którym zostanie zbudowany nasz kontener. 
-FROM python:3.8-slim-buster  
-
-# Ustawia bieżący katalog roboczy wewnątrz kontenera jako "/app"
-WORKDIR /app  
-
-# Kopiuje plik "requirements.txt" z lokalnego systemu do katalogu "/app" wewnątrz kontenera
-ADD requirements.txt .  
-
-# Instaluje wymagane biblioteki Pythona, korzystając z pliku "requirements.txt"
-RUN pip install -r requirements.txt  
-
-# Kopiuje całą zawartość katalogu lokalnego do katalogu "/app" wewnątrz kontenera
-COPY . .  
-
-# Uruchamia aplikację FastAPI na porcie 8004, korzystając z serwera ASGI "uvicorn" i pliku "app.py" zawierającego obiekt aplikacji FastAPI
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8004" , "--reload"]  
-
-```
-
 
 ## PYTHON FASTAPI UVICORN DEMO
 https://docs.docker.com/language/python/build-images/
@@ -87,6 +65,32 @@ app = FastAPI()
 @app.get('/')
 def hello_world():
     return 'Hello, Docker!'
+```
+
+## Tworzenie pliku Dockerfile
+w głownym katalogu projektu utwórz plik bez rozszerzenia o nazwie `Dockerfile`
+
+
+```Dockerfile
+# Dockerfile
+# Określa bazowy obraz Docker, na którym zostanie zbudowany nasz kontener. 
+FROM python:3.8-slim-buster  
+
+# Ustawia bieżący katalog roboczy wewnątrz kontenera jako "/app"
+WORKDIR /app  
+
+# Kopiuje plik "requirements.txt" z lokalnego systemu do katalogu "/app" wewnątrz kontenera
+ADD requirements.txt .  
+
+# Instaluje wymagane biblioteki Pythona, korzystając z pliku "requirements.txt"
+RUN pip install -r requirements.txt  
+
+# Kopiuje całą zawartość katalogu lokalnego do katalogu "/app" wewnątrz kontenera
+COPY . .  
+
+# Uruchamia aplikację FastAPI na porcie 8004, korzystając z serwera ASGI "uvicorn" i pliku "app.py" zawierającego obiekt aplikacji FastAPI
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8004" , "--reload"]  
+
 ```
 
 
