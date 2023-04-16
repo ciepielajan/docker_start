@@ -44,6 +44,30 @@ sudo systemctl status docker
 ```
 docker run hello-world
 ```
+## Tworzenie pliku Dockerfile
+```Dockerfile
+FROM python:3.8-slim-buster
+
+WORKDIR /app
+ADD requirements.txt . 
+RUN pip install -r requirements.txt
+COPY . .
+WORKDIR /app/folder_projektu  
+CMD ["python", "-m" , "flask", "run", "--host=0.0.0.0"]
+```
+Objaśnienia:
+```Dockerfile
+FROM python:3.8-slim-buster
+
+WORKDIR /app
+ADD requirements.txt . 
+RUN pip install -r requirements.txt
+COPY . .
+EXPOSE 8004
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8004" , "--reload"]
+```
+
+
 ## PYTHON DEMO
 https://docs.docker.com/language/python/build-images/
 
@@ -60,7 +84,7 @@ Sprawdź czy istnieje nowo powstały obraz konternera
 
 2. Uruchom zbudowany kontener
 ```
-docker run --publish 8000:5000 nazwa_obrazu
+docker run -p 8000:5000 nazwa_obrazu
 ```
 Obraz zostanie uruchomiony pod portem **8000** 
 
