@@ -93,9 +93,6 @@ Obraz zostanie uruchomiony pod portem **8000**
 Bez mapowania portów podczas uruchamiania obrazu nie będzie on działał jako lokalhost lub 0.0.0.0. Będzie dostepny pod adresem IP przydzielonym przez dockera. Poniżej test pod, którym IP udało się połączyc ze stroną po uruchomieniu obraz poleceniem 
 ```docker run nazwa_obrazu```
 
-![image](https://user-images.githubusercontent.com/4579021/232334553-0b3a466c-66d4-4521-8f87-c772387e9a3c.png)
-
-
 
 ## błędy i rozwiązania: 
 ### case 1
@@ -119,8 +116,15 @@ docker lub docker-compose nie mapują dobrze portów. W każdym pliku Dockerfile
 EXPOSE 8004 
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8004" , "--reload"]
 ```
-wszysktie możliwe lokalne adresy IP działają
-
-![image](https://user-images.githubusercontent.com/4579021/232339672-f809bd56-927a-472a-b9d1-63425ed883cd.png)
+### case 3
+Nie działają adresy IP takie jak localhost, czy 0.0.0.0 . Uruchom kontener z dodatkowymi prametrami.
+  
+![image](https://user-images.githubusercontent.com/4579021/232334553-0b3a466c-66d4-4521-8f87-c772387e9a3c.png)
+ 
+```Bash
+docker run -p 8000:8000 -e HOST=0.0.0.0 -e PORT=8000 nazwa_kontenera
+```
+  
+![image](https://user-images.githubusercontent.com/4579021/232339841-2d3d9420-2484-4cc9-8aad-a2a66c2c714c.png)
 
 
