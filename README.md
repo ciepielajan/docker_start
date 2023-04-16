@@ -108,6 +108,8 @@ Sprawdź czy istnieje nowo powstały obraz konternera
 2. Uruchom zbudowany kontener
 ```
 docker run -p 8000:5000 nazwa_obrazu
+# jeżeli zależy nam żeby komunikować się z kontenerem prezz host 0.0.0.0 lub localhost. 
+docker run -p 8000:5000 -e HOST=0.0.0.0 nazwa_kontenera
 ```
 Obraz zostanie uruchomiony pod portem **8000** 
 
@@ -140,7 +142,7 @@ EXPOSE 8004
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8004" , "--reload"]
 ```
 ### case 3
-Nie działają adresy IP takie jak localhost, czy 0.0.0.0 . Uruchom kontener z dodatkowymi prametrami.
+Nie działają adresy IP takie jak localhost, czy 0.0.0.0 . Uruchom kontener z dodatkowymi prametrami. Dzieje się tak ponieważ kontner nie ma powiazania z lokalnymi adresami systemu operacyjnego. Wewnątrz kontenera tworzy własne lokalne adresy. Żeby były one takie same jak te systemowe trzeba je ustawić. 
   
 ![image](https://user-images.githubusercontent.com/4579021/232334553-0b3a466c-66d4-4521-8f87-c772387e9a3c.png)
  
