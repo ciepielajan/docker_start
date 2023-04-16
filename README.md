@@ -8,7 +8,8 @@ docker run hello-word
 docker ps
 docker images
 docker container ls -a
-docker rm name_container
+docker rmi name_container
+docker rmi --force name_container
 # Sprawdzenie statusu działania dockera
 sudo systemctl status docker.service 
 sudo systemctl restart docker.service
