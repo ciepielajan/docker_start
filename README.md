@@ -62,6 +62,8 @@ Sprawdź czy istnieje nowo powstały obraz konternera
 ```
 docker run --publish 8000:5000 nazwa_obrazu
 ```
+Obraz zostanie uruchomiony pod portem **8000** 
+
 ![image](https://user-images.githubusercontent.com/4579021/232314018-ee7afc83-edfc-476e-920c-e1d5691617d2.png)
 
 Bez mapowania portów podczas uruchamiania obrazu nie będzie on działał jako lokalhost lub 0.0.0.0. Będzie dostepny pod adresem IP przydzielonym przez dockera. Poniżej test pod, którym IP udało się połączyc ze stroną po uruchomieniu obraz poleceniem 
