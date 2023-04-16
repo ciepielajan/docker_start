@@ -45,6 +45,20 @@ sudo systemctl status docker
 docker run hello-world
 ```
 
+
+## uruchomienie repozytorium z plikiem Dockerfile.
+0. Przejdź do katalogu w którym znajduje się Dockerfile
+1. Zbuduj obraz kontenera 
+```
+# nazwa_obrazu - nazwa pod którą docker będzie widział aplikację. 
+docker build -t nazwa_obrazu .
+```
+2. Uruchom zbudowany kontener
+```
+docker run nazwa_obrazu
+```
+
+
 ## błędy i rozwiązania: 
 
 ```
