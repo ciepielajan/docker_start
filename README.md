@@ -119,5 +119,8 @@ docker lub docker-compose nie mapują dobrze portów. W każdym pliku Dockerfile
 EXPOSE 8004 
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8004" , "--reload"]
 ```
+wszysktie możliwe lokalne adresy IP działają
+
+![image](https://user-images.githubusercontent.com/4579021/232339672-f809bd56-927a-472a-b9d1-63425ed883cd.png)
 
 
