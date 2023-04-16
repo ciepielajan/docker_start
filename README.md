@@ -98,7 +98,7 @@ Bez mapowania portów podczas uruchamiania obrazu nie będzie on działał jako 
 
 
 ## błędy i rozwiązania: 
-
+### case 1
 ```
 docker run hello-world
 ```
@@ -112,5 +112,12 @@ lub dodaj siebie (użytkownika) do grupy docker'a przez polecenie
 sudo usermod -aG docker <nazwa_użytkownika>
 ```
 i ponowne uruchomienie systemu. 
+
+### case 2
+docker lub docker-compose nie mapują dobrze portów. W każdym pliku Dockerfile dodaj przed wywołaniem serwer **EXPOSE <nr portu> **
+```Dockerfile
+EXPOSE 8004 
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8004" , "--reload"]
+```
 
 
