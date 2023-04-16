@@ -67,8 +67,28 @@ CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8004" , "--reload"]
 ```
 
 
-## PYTHON DEMO
+## PYTHON FASTAPI UVICORN DEMO
 https://docs.docker.com/language/python/build-images/
+
+```bash
+mkdir nazwa_projektu
+cd ./nazwa_projektu
+python -m venv .venv
+source .venv/bin/activate
+pip install fastapi uvicorn
+pip freeze > requirements.txt
+touch app.py
+```
+```python
+# app.py
+from fastapi import FastAPI
+app = FastAPI()
+
+@app.get('/')
+def hello_world():
+    return 'Hello, Docker!'
+```
+
 
 ## uruchomienie repozytorium z plikiem Dockerfile.
 0. Przejdź do katalogu w którym znajduje się Dockerfile
