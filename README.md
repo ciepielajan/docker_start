@@ -148,10 +148,10 @@ Nie działają adresy IP takie jak localhost, czy 0.0.0.0 . Uruchom kontener z d
 ![image](https://user-images.githubusercontent.com/4579021/232334553-0b3a466c-66d4-4521-8f87-c772387e9a3c.png)
 
 ```bash
-curl 172.17.0.2:5000
-curl 127.0.0.1:5000
-curl 0.0.0.0:5000
-curl localhost:5000
+curl 172.17.0.2:8000
+curl 127.0.0.1:8000
+curl 0.0.0.0:8000
+curl localhost:8000
 ```
  
 ```Bash
