@@ -146,6 +146,13 @@ CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8004" , "--reload"]
 Nie działają adresy IP takie jak localhost, czy 0.0.0.0 . Uruchom kontener z dodatkowymi prametrami. Dzieje się tak ponieważ kontner nie ma powiazania z lokalnymi adresami systemu operacyjnego. Wewnątrz kontenera tworzy własne lokalne adresy. Żeby były one takie same jak te systemowe trzeba je ustawić. 
   
 ![image](https://user-images.githubusercontent.com/4579021/232334553-0b3a466c-66d4-4521-8f87-c772387e9a3c.png)
+
+```bash
+curl 172.17.0.2:5000
+curl 127.0.0.1:5000
+curl 0.0.0.0:5000
+curl localhost:5000
+```
  
 ```Bash
 docker run -p 8000:8000 -e HOST=0.0.0.0 -e PORT=8000 nazwa_kontenera
