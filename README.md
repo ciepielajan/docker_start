@@ -5,11 +5,21 @@
 ```bash
 docker version
 docker run hello-word
+# aktywne kontywnenery 
 docker ps
+# wszystkie kontywnenery 
+docker ps -a
+# wszystkie id kontenerów 
+docker ps -aq
+# wszystkie obrazy 
 docker images
-docker container ls -a
-docker rmi name_container
-docker rmi --force name_container
+# usunięcie images i containers
+docker rmi name_container/id_container/name_image/id_image/
+docker rmi --force name_container/id_container/name_image/id_image/
+# usunięcie wszysktich kontenerów
+docker rm -f $(docker ps -aq)
+# usunięcie wszystkich obrazów
+docker rmi -f $(docker images -aq)
 # Sprawdzenie statusu działania dockera
 sudo systemctl status docker.service 
 sudo systemctl restart docker.service
@@ -74,24 +84,34 @@ w głownym katalogu projektu utwórz plik bez rozszerzenia o nazwie `Dockerfile`
 
 ```Dockerfile
 # Dockerfile
-# Określa bazowy obraz Docker, na którym zostanie zbudowany nasz kontener. 
-FROM python:3.8-slim-buster  
 
-# Ustawia bieżący katalog roboczy wewnątrz kontenera jako "/app"
-WORKDIR /app  
+# Określa bazowy obraz Pythona 3.8 z zainstalowanym systemem operacyjnym "Slim" na bazie dystrybucji Debian "Buster".
+# Obraz ten zawiera minimalną instalację systemu operacyjnego, Pythona 3.8 i kilka podstawowych narzędzi.
+FROM python:3.8-slim-buster
 
-# Kopiuje plik "requirements.txt" z lokalnego systemu do katalogu "/app" wewnątrz kontenera
-ADD requirements.txt .  
-
-# Instaluje wymagane biblioteki Pythona, korzystając z pliku "requirements.txt"
-RUN pip install -r requirements.txt  
+# Tworzy bieżący katalog roboczy wewnątrz kontenera jako "/app"
+WORKDIR /app
 
 # Kopiuje całą zawartość katalogu lokalnego do katalogu "/app" wewnątrz kontenera
-COPY . .  
+COPY . .
 
-# Uruchamia aplikację FastAPI na porcie 8004, korzystając z serwera ASGI "uvicorn" i pliku "app.py" zawierającego obiekt aplikacji FastAPI
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8004" , "--reload"]  
+# Instaluje wymagane biblioteki Pythona, korzystając z pliku "requirements.txt"
+RUN pip install -r requirements.txt
 
+# wymusza nasłuchiwanie konkretnego port (nie jest konieczne)
+# Dzięki temu, port 8000 w kontenerze zostanie przekierowany na port 8000 w systemie hosta, co umożliwi dostęp do aplikacji z poziomu przeglądarki 
+EXPOSE 8000
+
+# Uruchamia serwer FastAPI na porcie 8000, korzystając z serwera ASGI "uvicorn" i pliku "app.py" zawierającego obiekt aplikacji FastAPI
+CMD exec uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+```
+```Dockerfile
+FROM python:3.8-slim-buster
+WORKDIR /app
+COPY . .
+RUN pip install -r requirements.txt
+EXPOSE 8000
+CMD exec uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 
@@ -111,6 +131,9 @@ Sprawdź czy istnieje nowo powstały obraz konternera
 docker run -p 8000:5000 nazwa_obrazu
 # jeżeli zależy nam żeby komunikować się z kontenerem prezz host 0.0.0.0 lub localhost. 
 docker run -p 8000:5000 -e HOST=0.0.0.0 nazwa_kontenera
+
+# oznacza, że port 8000 w systemie hosta zostanie przekierowany na port 5000 w kontenerze Docker, w którym działa nasza aplikacja.
+8000:5000 
 ```
 Obraz zostanie uruchomiony pod portem **8000** 
 
